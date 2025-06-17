@@ -1,0 +1,438 @@
+.card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+}
+
+/* Special styling for the card headers in all tabs */
+#schedule-tab-pane .card-header,
+#tasks-tab-pane .card-header,
+#availability-tab-pane .card-header {
+    background-color: #74a9e2;
+    color: white;
+}
+
+/* Make the hint text in card header white */
+#schedule-tab-pane .card-header small.text-muted,
+#tasks-tab-pane .card-header small.text-muted,
+#availability-tab-pane .card-header small.text-muted {
+    color: white !important;
+}
+
+#schedule .schedule-item {
+    border-left: 4px solid  #74a9e2;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f8f9fa;
+}
+
+#schedule .schedule-item:hover {
+    background-color: #e9ecef;
+}
+
+.error {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Department color coding with pastel colors */
+.dept-helpline-leadership {
+    background-color: #e6f7ff; /* Light pastel blue */
+}
+
+.dept-team-leaders {
+    background-color: #fff0f5; /* Lavender blush */
+}
+
+.dept-211-helpline {
+    background-color: #e6ffe6; /* Light pastel green */
+}
+
+.dept-988-crisis {
+    background-color: #fff5e6; /* Light pastel orange */
+}
+
+.dept-care-coordinators {
+    background-color: #f0e6ff; /* Light pastel purple */
+}
+
+.dept-chat-email-text {
+    background-color: #ffffe6; /* Light pastel yellow */
+}
+
+.dept-court-community {
+    background-color: #ffe6e6; /* Light pastel red */
+}
+
+/* Fix for ELC department - ensure content is visible */
+.dept-elc-answering {
+    background-color: #e6fff2; /* Light pastel mint */
+    color: #333 !important; /* Ensure text is visible */
+}
+
+.dept-touchline {
+    background-color: #ffe6f7; /* Light pastel pink */
+}
+
+.dept-available-shifts {
+    background-color: #f2f2f2; /* Light gray */
+}
+
+/* Make department headers stand out better */
+.dept-header {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-top: 2px solid #ddd !important;
+}
+
+/* Improve grid lines and cell definition */
+#scheduleTable,
+.table-bordered {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #dee2e6;
+}
+
+/* Ensure all table cells show content properly with stronger styling */
+.table th,
+.table td,
+#scheduleTable th,
+#scheduleTable td {
+    border: 1px solid #adb5bd !important; /* Darker border color */
+    padding: 8px;
+    vertical-align: top;
+    color: #333;
+    font-weight: normal;
+    background-clip: padding-box;
+    position: relative;
+    min-height: 24px;
+}
+
+#scheduleTable th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Add hover effect for better user experience */
+#scheduleTable tbody tr:hover td,
+.table tbody tr:hover td {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Task styling improvement */
+.task-item {
+    background-color: #f8d7da;
+    padding: 4px 8px;
+    margin-top: 5px;
+    border-radius: 3px;
+    border-left: 3px solid #dc3545;
+    font-size: 0.9em;
+}
+
+/* Ensure all department cells properly display content */
+.table td[class*="dept-"] {
+    display: table-cell !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Fix dropdown styling to remove excess whitespace */
+select.form-select option {
+    padding: 4px 8px;
+    white-space: normal;
+    line-height: 1.2;
+}
+
+/* Specifically target employee dropdown for more compact display */
+#employeeSelect {
+    max-height: 400px;
+}
+
+#employeeSelect option {
+    padding: 2px 6px;
+    font-size: 0.9rem;
+}
+
+/* Add styles for the inline editing feature */
+.schedule-cell {
+    position: relative;
+    min-height: 40px;
+}
+
+.shift-content {
+    flex-grow: 1;
+}
+
+.shift-actions {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.schedule-cell:hover .shift-actions {
+    opacity: 1;
+}
+
+.edit-shift-btn, .add-shift-btn {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.7rem;
+}
+
+.shift-editor {
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 5px;
+    position: relative;
+    z-index: 100;
+}
+
+.shift-editor .form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.shift-editor .col {
+    flex: 1;
+}
+
+.shift-editor .col-auto {
+    padding: 0 5px;
+}
+
+.form-select-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Make the CSV upload section more compact */
+.upload-container {
+    position: relative;
+    float: right;
+    margin-bottom: 20px;
+}
+
+.upload-toggle {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+}
+
+.upload-toggle i {
+    margin-right: 5px;
+}
+
+.upload-form-container {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    width: 300px;
+    background-color: white;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    z-index: 1000;
+}
+
+/* Ticker / Announcements Styling */
+.ticker-wrapper {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+}
+
+.ticker-content {
+    position: absolute;
+    width: 100%;
+    animation: ticker-scroll 30s linear infinite;
+    padding: 0 10px;
+}
+
+.ticker-content:hover {
+    animation-play-state: paused; /* Pause on hover */
+}
+
+@keyframes ticker-scroll {
+    0% {
+        transform: translateY(200px);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+.ticker-item {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    background-color: #fff;
+    border-left: 3px solid #74a9e2;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.ticker-item:hover {
+    transform: translateX(5px);
+}
+
+.ticker-item.important {
+    background-color: #fff8e6;
+    border-left-color: #ffc107;
+}
+
+.ticker-item.urgent {
+    background-color: #ffeeee;
+    border-left-color: #dc3545;
+}
+
+.ticker-item .ticker-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.ticker-item .ticker-date {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-top: 5px;
+    text-align: right;
+}
+
+.ticker-item-form {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    border: 1px solid #dee2e6;
+}
+
+.ticker-item-form .form-group {
+    margin-bottom: 15px;
+}
+
+.ticker-actions {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.ticker-loading {
+    padding: 15px;
+    text-align: center;
+    color: #6c757d;
+}
+
+/* Admin Button Styling */
+#adminAccessBtn {
+    transition: all 0.3s;
+}
+
+#adminAccessBtn.admin-active {
+    background-color: #74a9e2;
+    color: white;
+    border-color: #74a9e2;
+}
+
+#adminTickerControls .btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Admin mode styling */
+.admin-mode .edit-shift-btn,
+.admin-mode .add-shift-btn,
+.admin-mode .delete-task {
+    display: inline-block !important;
+}
+
+.admin-status-alert {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 1050;
+    max-width: 350px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Read-only visual indicators */
+body:not(.admin-mode) .schedule-cell {
+    cursor: default !important;
+}
+
+body:not(.admin-mode) .nav-tabs,
+body:not(.admin-mode) select,
+body:not(.admin-mode) .upload-toggle {
+    cursor: pointer; /* Keep these interactive even in read-only mode */
+}
+
+body:not(.admin-mode) .form-control, 
+body:not(.admin-mode) .form-select {
+    background-color: #f8f9fa;
+    cursor: not-allowed;
+}
+
+/* Add a read-only badge to the page when not in admin mode */
+body:not(.admin-mode)::before {
+    content: "READ ONLY";
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    z-index: 1000;
+}
+
+/* Date styling for the weekly schedule */
+.date-cell {
+    font-size: 0.9rem;
+    text-align: center;
+    background-color: #f8f9fa;
+}
+
+.current-date {
+    background-color: #ffeeba !important;
+    font-weight: bold;
+    position: relative;
+}
+
+.current-date::after {
+    content: " (Today)";
+    font-size: 0.7rem;
+    font-weight: normal;
+    font-style: italic;
+    display: block;
+}
+
+/* Center the month display in the Weekly Schedule header */
+.card-header h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#currentMonth {
+    color: white !important;
+    font-weight: normal;
+    margin-left: 10px;
+    display: inline-block;
+}
