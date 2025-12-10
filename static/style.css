@@ -114,13 +114,32 @@
     min-height: 24px;
 }
 
-#scheduleTable th {
+/* Make BOTH header rows sticky so the header stays pinned while scrolling */
+#scheduleTable thead tr:first-child th {
+    position: sticky !important;
+    top: 0 !important; /* First header row (days of week) */
+    z-index: 1050; /* Keep above body cells */
     background-color: #f8f9fa;
     border-bottom: 2px solid #dee2e6;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.06);
 }
+
+/* Second header row (dates) sticks right under the first row */
+#scheduleTable thead tr:nth-child(2) th {
+    position: sticky !important;
+    top: 42px !important; /* Height of first row incl. borders/padding */
+    z-index: 1049;
+    background-color: #fcfcfc;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #dee2e6;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.04);
+}
+
+/* Ensure no ancestor blocks sticky behavior on Y-axis */
+.table-responsive { overflow-y: visible; }
 
 /* Add hover effect for better user experience */
 #scheduleTable tbody tr:hover td,
@@ -337,6 +356,61 @@ select.form-select option {
     padding: 15px;
     text-align: center;
     color: #6c757d;
+}
+
+.schedule-fixed-col {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.column-editor-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.column-editor-item {
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 10px;
+    background-color: #fdfdfd;
+}
+
+.column-editor-item.disabled {
+    opacity: 0.55;
+}
+
+.column-editor-item .form-control,
+.column-editor-item .form-check-input {
+    font-size: 0.85rem;
+}
+
+.column-editor-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+/* Sticky header JS fallback overlay */
+#scheduleStickyHeader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2000;
+    display: none; /* toggled via JS */
+    pointer-events: none; /* let clicks go to content below */
+}
+#scheduleStickyHeader .inner {
+    margin: 0 auto;
+    pointer-events: none;
+}
+#scheduleStickyHeader table {
+    margin: 0;
+    border-collapse: separate;
+}
+#scheduleStickyHeader th {
+    background-color: #f8f9fa;
 }
 
 /* Admin Button Styling */

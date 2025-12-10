@@ -52,6 +52,12 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="availability-tab" data-bs-toggle="tab" data-bs-target="#availability-tab-pane" type="button" role="tab" aria-controls="availability-tab-pane" aria-selected="false">Find Available Employees</button>
             </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="timeoff-tab" data-bs-toggle="tab" data-bs-target="#timeoff-tab-pane" type="button" role="tab" aria-controls="timeoff-tab-pane" aria-selected="false">Time Off Requests</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="insights-tab" data-bs-toggle="tab" data-bs-target="#insights-tab-pane" type="button" role="tab" aria-controls="insights-tab-pane" aria-selected="false">AI Insights</button>
+            </li>
         </ul>
         
         <div class="tab-content" id="myTabContent">
@@ -95,6 +101,53 @@
                     </div>
                 </div>
 
+                <div class="row mb-4" id="scheduleAdminPanel" style="display: none;">
+                    <div class="col-lg-6 mb-3 mb-lg-0">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h3 class="mb-0">Add Team Member</h3>
+                                <span class="badge bg-secondary">Admin</span>
+                            </div>
+                            <div class="card-body">
+                                <form id="addEmployeeForm">
+                                    <div class="mb-2">
+                                        <label class="form-label">Name</label>
+                                        <input type="text" class="form-control form-control-sm" id="newEmployeeName" placeholder="Full name" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label">Position / Title</label>
+                                        <input type="text" class="form-control form-control-sm" id="newEmployeePosition" placeholder="e.g. Helpline Counselor">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label">Department / Group</label>
+                                        <input type="text" class="form-control form-control-sm" id="newEmployeeDepartment" placeholder="e.g. 211 HELPLINE">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Supervisor (optional)</label>
+                                        <input type="text" class="form-control form-control-sm" id="newEmployeeSupervisor" placeholder="Supervisor name">
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-primary btn-sm">Add Employee</button>
+                                    </div>
+                                    <small class="text-muted d-block mt-2">Employees created here stay in the system until removed.</small>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h3 class="mb-0">Columns</h3>
+                                <button class="btn btn-sm btn-outline-secondary" id="restoreColumnsBtn">Restore Hidden</button>
+                            </div>
+                            <div class="card-body" id="scheduleColumnControls">
+                                <p class="text-muted small">Toggle visibility, rename columns, or clear a day entirely.</p>
+                                <div id="columnEditorList" class="column-editor-list"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Schedule Table -->
                 <div class="row">
                     <div class="col-12">
@@ -106,17 +159,11 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="scheduleTable">
-                                        <thead>
-                                            <tr>
-                                                <th rowspan="2">Employee</th>
-                                                <th rowspan="2">Position</th>
-                                                <th>Saturday</th>
-                                                <th>Sunday</th>
-                                                <th>Monday</th>
-                                                <th>Tuesday</th>
-                                                <th>Wednesday</th>
-                                                <th>Thursday</th>
-                                                <th>Friday</th>
+                                        <thead id="scheduleHeader">
+                                            <tr id="dayHeaderRow">
+                                                <th rowspan="2" class="schedule-fixed-col">Employee</th>
+                                                <th rowspan="2" class="schedule-fixed-col">Position</th>
+                                                <!-- Day headers inserted by JS -->
                                             </tr>
                                             <tr id="dateRow">
                                                 <!-- Date values will be inserted here by JavaScript -->
@@ -271,6 +318,103 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Time Off Requests Tab -->
+            <div class="tab-pane fade" id="timeoff-tab-pane" role="tabpanel" aria-labelledby="timeoff-tab" tabindex="0">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="card">
+                    <div class="card-header"><h3>Submit Time Off</h3></div>
+                    <div class="card-body">
+                      <form id="timeoffForm">
+                        <div class="mb-3">
+                          <label class="form-label">Employee</label>
+                          <select class="form-select" id="timeoffEmployeeSelect" required></select>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Type</label>
+                          <select class="form-select" id="timeoffType" required>
+                            <option value="vacation">Vacation</option>
+                            <option value="sick">Sick</option>
+                            <option value="pto">PTO</option>
+                          </select>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Start Date</label>
+                          <input type="date" class="form-control" id="timeoffStart" required>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">End Date</label>
+                          <input type="date" class="form-control" id="timeoffEnd" required>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Reason</label>
+                          <textarea class="form-control" id="timeoffReason" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Request</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="card">
+                    <div class="card-header"><h3>Review Requests</h3></div>
+                    <div class="card-body">
+                      <ul class="list-group" id="timeoffRequestList">
+                        <!-- Manager sees requests here -->
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- AI Insights Tab -->
+            <div class="tab-pane fade" id="insights-tab-pane" role="tabpanel" aria-labelledby="insights-tab" tabindex="0">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <h3>Predictive Scheduling & Burnout Insights</h3>
+                    </div>
+                    <div class="card-body">
+                                            <div class="mb-3">
+                                                <div class="row g-3" id="insightsActionCenter">
+                                                    <div class="col-md-6">
+                                                        <div class="p-3 border rounded h-100">
+                                                            <h5 class="mb-2">Action Center: Coverage Issues</h5>
+                                                            <div class="text-muted small mb-2">Under-covered 988/CRISIS intervals with suggested backfills</div>
+                                                            <ul class="list-group" id="coverageIssues"></ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="p-3 border rounded h-100">
+                                                            <h5 class="mb-2">Action Center: Burnout Risks</h5>
+                                                            <div class="text-muted small mb-2">Employees needing intervention this week</div>
+                                                            <ul class="list-group" id="burnoutRisks"></ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                                            <div class="mb-3" id="suggestionsPanel">
+                                                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                                                    <h5 class="mb-0">Suggestions (Admin Approval Required)</h5>
+                                                                                    <div>
+                                                                                        <button class="btn btn-sm btn-outline-primary" id="btnGenSuggestions">Generate</button>
+                                                                                        <button class="btn btn-sm btn-outline-secondary" id="btnEmailInsights">Email Summary</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <ul class="list-group" id="suggestionsList"></ul>
+                                                                            </div>
+                                            </div>
+                      <ul class="list-group" id="insightsList">
+                        <!-- AI insights will appear here -->
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
         </div>
     </div>
